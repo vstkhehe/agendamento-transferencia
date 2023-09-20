@@ -4,10 +4,10 @@ import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
 @SpringBootApplication
-public class TokiomarineApplication {
+public class TokioMarineApplication {
 
 	public static void main(String[] args) {
-		SpringApplication.run(TokiomarineApplication.class, args);
+		SpringApplication.run(TokioMarineApplication.class, args);
 	}
 
 }
