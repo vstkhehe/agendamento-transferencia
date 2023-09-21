@@ -4,17 +4,19 @@ import lombok.extern.slf4j.Slf4j;
 
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
+
 @Slf4j
 public class CalculosUtil {
     private static Double porcentagem = 0.0;
 
     public static String ERRO_RANGE_DATA = "Data de transferência fora da faixa da data do agendamento";
-    public static double regraTipoA(Double valorTransferencia){
-        porcentagem = (3.0/100.0) * valorTransferencia;
+
+    public static double regraTipoA(Double valorTransferencia) {
+        porcentagem = (3.0 / 100.0) * valorTransferencia;
         return porcentagem;
     }
 
-    public static boolean rangeDiasRegraB(String dataAgendamento, String dataTransferencia){
+    public static boolean rangeDiasRegraB(String dataAgendamento, String dataTransferencia) {
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd-MM-yyyy");
 
         var parseDataAgendamento = LocalDate.parse(dataAgendamento, formatter);
@@ -26,53 +28,52 @@ public class CalculosUtil {
             return false;
     }
 
-    public static Double rangeDiasRegraC(String dataAgendamento, String dataTransferencia, Double valorTransferencia){
-        int identificadorRegra = 0;
+    public static Double rangeDiasRegraC(String dataAgendamento, String dataTransferencia, Double valorTransferencia) {
 
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd-MM-yyyy");
 
         var parseDataAgendamento = LocalDate.parse(dataAgendamento, formatter);
         var parseDataTransferencia = LocalDate.parse(dataTransferencia, formatter);
-        var dataPlus  = parseDataAgendamento.plusDays(10);
 
         if (parseDataTransferencia.isAfter(parseDataAgendamento.plusDays(10))
                 && parseDataTransferencia.isBefore(parseDataAgendamento.plusDays(21))) {
-            identificadorRegra = 1;
+            return switchCasePorcentagemRegraC(1, valorTransferencia);
         }
         if (parseDataTransferencia.isAfter(parseDataAgendamento.plusDays(20))
                 && parseDataTransferencia.isBefore(parseDataAgendamento.plusDays(31))) {
-            identificadorRegra = 2;
+            return switchCasePorcentagemRegraC(2, valorTransferencia);
         }
         if (parseDataTransferencia.isAfter(parseDataAgendamento.plusDays(30))
                 && parseDataTransferencia.isBefore(parseDataAgendamento.plusDays(41))) {
-            identificadorRegra = 3;
+            return switchCasePorcentagemRegraC(3, valorTransferencia);
         }
         if (parseDataTransferencia.isAfter(parseDataAgendamento.plusDays(40))) {
-            identificadorRegra = 4;
+            return switchCasePorcentagemRegraC(4, valorTransferencia);
         } else {
             log.info(ERRO_RANGE_DATA);
-            return null;
         }
+        return null;
+    }
 
-    Double result = null;
+    private static Double switchCasePorcentagemRegraC(int identificadorRegra, Double valorTransferencia) {
+        Double result = null;
         switch (identificadorRegra) {
             case 1:
-                result = (8.2/100.0) * valorTransferencia;
+                result = (8.2 / 100.0) * valorTransferencia;
                 break;
             case 2:
-                result = (6.9/100.0) * valorTransferencia;
+                result = (6.9 / 100.0) * valorTransferencia;
                 break;
             case 3:
-                result = (4.7/100.0) * valorTransferencia;
+                result = (4.7 / 100.0) * valorTransferencia;
                 break;
             case 4:
-                result = (1.7/100.0) * valorTransferencia;
+                result = (1.7 / 100.0) * valorTransferencia;
                 break;
             default:
                 result = 0.0;
                 log.info(ERRO_RANGE_DATA);
                 break;
-
         }
         return result;
     }
