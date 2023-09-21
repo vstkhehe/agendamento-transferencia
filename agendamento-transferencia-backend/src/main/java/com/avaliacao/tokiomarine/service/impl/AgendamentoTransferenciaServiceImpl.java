@@ -13,8 +13,8 @@ import java.util.List;
 import java.util.Objects;
 
 import static com.avaliacao.tokiomarine.util.CalculosUtil.rangeDiasRegraB;
-import static com.avaliacao.tokiomarine.util.RequestBuilderModelUtil.buildAgendamentoRegraTipoA;
-import static com.avaliacao.tokiomarine.util.RequestBuilderModelUtil.buildAgendamentoRegraTipoB;
+import static com.avaliacao.tokiomarine.util.CalculosUtil.rangeDiasRegraC;
+import static com.avaliacao.tokiomarine.util.RequestBuilderModelUtil.*;
 
 @Slf4j
 @Service
@@ -40,9 +40,12 @@ public class AgendamentoTransferenciaServiceImpl implements AgendamentoTransfere
         }
         if (rangeDiasRegraB(agendamentoTransferenciaModel.getDataAgendamento(), agendamentoTransferenciaModel.getDataTransferencia())) {
             return agendamentoTransferenciaRepository.save(buildAgendamentoRegraTipoB(agendamentoTransferenciaModel));
+        }else{
+            rangeDiasRegraC(agendamentoTransferenciaModel.getDataAgendamento(), agendamentoTransferenciaModel.getDataTransferencia(), agendamentoTransferenciaModel.getValorTransferencia());
+            return agendamentoTransferenciaRepository.save(buildAgendamentoRegraTipoC(agendamentoTransferenciaModel));
         }
-        log.error(REGRAS_TRANSFERENCIA_ERRO + ResponseEntity.badRequest());
-        return null;
+        //log.error(REGRAS_TRANSFERENCIA_ERRO + ResponseEntity.badRequest());
+        //return null;
     }
 
     @Override
