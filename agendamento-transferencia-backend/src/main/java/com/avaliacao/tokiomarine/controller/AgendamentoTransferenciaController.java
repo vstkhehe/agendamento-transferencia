@@ -34,7 +34,7 @@ public class AgendamentoTransferenciaController {
 
     }
 
-    @GetMapping
+    @GetMapping("/agendamentos")
     public ResponseEntity getAgendamentos(){
         return ResponseEntity.ok(agendamentoTransferenciaService.getAgendamentos());
 
