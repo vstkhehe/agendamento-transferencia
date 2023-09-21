@@ -44,8 +44,6 @@ public class AgendamentoTransferenciaServiceImpl implements AgendamentoTransfere
             rangeDiasRegraC(agendamentoTransferenciaModel.getDataAgendamento(), agendamentoTransferenciaModel.getDataTransferencia(), agendamentoTransferenciaModel.getValorTransferencia());
             return agendamentoTransferenciaRepository.save(buildAgendamentoRegraTipoC(agendamentoTransferenciaModel));
         }
-        //log.error(REGRAS_TRANSFERENCIA_ERRO + ResponseEntity.badRequest());
-        //return null;
     }
 
     @Override

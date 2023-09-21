@@ -33,31 +33,47 @@ public class CalculosUtil {
 
         var parseDataAgendamento = LocalDate.parse(dataAgendamento, formatter);
         var parseDataTransferencia = LocalDate.parse(dataTransferencia, formatter);
+        var dataPlus  = parseDataAgendamento.plusDays(10);
 
-        if (parseDataTransferencia.isAfter(parseDataAgendamento.plusDays(11))
-                && parseDataTransferencia.isBefore(parseDataAgendamento.plusDays(21)))
-            identificadorRegra =  1;
-        else
+        if (parseDataTransferencia.isAfter(parseDataAgendamento.plusDays(10))
+                && parseDataTransferencia.isBefore(parseDataAgendamento.plusDays(21))) {
+            identificadorRegra = 1;
+        }
+        if (parseDataTransferencia.isAfter(parseDataAgendamento.plusDays(20))
+                && parseDataTransferencia.isBefore(parseDataAgendamento.plusDays(31))) {
+            identificadorRegra = 2;
+        }
+        if (parseDataTransferencia.isAfter(parseDataAgendamento.plusDays(30))
+                && parseDataTransferencia.isBefore(parseDataAgendamento.plusDays(41))) {
+            identificadorRegra = 3;
+        }
+        if (parseDataTransferencia.isAfter(parseDataAgendamento.plusDays(40))) {
+            identificadorRegra = 4;
+        } else {
             log.info(ERRO_RANGE_DATA);
-
+            return null;
+        }
 
     Double result = null;
         switch (identificadorRegra) {
             case 1:
                 result = (8.2/100.0) * valorTransferencia;
                 break;
-            /*case "CAT":
-                result = "domestic animal";
+            case 2:
+                result = (6.9/100.0) * valorTransferencia;
                 break;
-            case "TIGER":
-                result = "wild animal";
+            case 3:
+                result = (4.7/100.0) * valorTransferencia;
+                break;
+            case 4:
+                result = (1.7/100.0) * valorTransferencia;
                 break;
             default:
-                result = "unknown animal";
-                break;*/
+                result = 0.0;
+                log.info(ERRO_RANGE_DATA);
+                break;
 
         }
-
         return result;
     }
 }
