@@ -35,14 +35,34 @@ public class AgendamentoTransferenciaServiceImpl implements AgendamentoTransfere
     }
 
     private AgendamentoTransferenciaModel regrasAgendamentoTransferencia(AgendamentoTransferenciaModel agendamentoTransferenciaModel) {
-        if (agendamentoTransferenciaModel.getDataTransferencia().equals(agendamentoTransferenciaModel.getDataAgendamento())) {
-            return agendamentoTransferenciaRepository.save(buildAgendamentoRegraTipoA(agendamentoTransferenciaModel));
+        if (agendamentoTransferenciaModel.getDataTransferencia().equals(agendamentoTransferenciaModel.getDataAgendamento())){
+            if(agendamentoTransferenciaModel.getValorTransferencia() <= 1000.0){
+                return agendamentoTransferenciaRepository.save(buildAgendamentoRegraTipoA(agendamentoTransferenciaModel));
+            }else{
+                log.info("Valor acima do permitido para a regra tipo A");
+                return null;
+            }
         }
+
         if (rangeDiasRegraB(agendamentoTransferenciaModel.getDataAgendamento(), agendamentoTransferenciaModel.getDataTransferencia())) {
-            return agendamentoTransferenciaRepository.save(buildAgendamentoRegraTipoB(agendamentoTransferenciaModel));
-        }else{
-            rangeDiasRegraC(agendamentoTransferenciaModel.getDataAgendamento(), agendamentoTransferenciaModel.getDataTransferencia(), agendamentoTransferenciaModel.getValorTransferencia());
-            return agendamentoTransferenciaRepository.save(buildAgendamentoRegraTipoC(agendamentoTransferenciaModel));
+            if(agendamentoTransferenciaModel.getValorTransferencia() >= 1001.0 && agendamentoTransferenciaModel.getValorTransferencia() <= 2000.0) {
+                return agendamentoTransferenciaRepository.save(buildAgendamentoRegraTipoB(agendamentoTransferenciaModel));
+            }else{
+                if (agendamentoTransferenciaModel.getValorTransferencia() <= 1001.0) {
+                    log.info("Valor abaixo do permitido para a regra tipo B");
+                } else {
+                    log.info("Valor acima do permitido para a regra tipo B");
+                }
+                return null;
+            }
+        }
+
+        if(agendamentoTransferenciaModel.getValorTransferencia() >2000.0){
+                rangeDiasRegraC(agendamentoTransferenciaModel.getDataAgendamento(), agendamentoTransferenciaModel.getDataTransferencia(), agendamentoTransferenciaModel.getValorTransferencia());
+                return agendamentoTransferenciaRepository.save(buildAgendamentoRegraTipoC(agendamentoTransferenciaModel));
+            }else{
+                log.info("Valor abaixo do permitido para a regra tipo C");
+                return null;
         }
     }
 
