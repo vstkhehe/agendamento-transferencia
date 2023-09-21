@@ -3,7 +3,6 @@ package com.avaliacao.tokiomarine.service.impl;
 import com.avaliacao.tokiomarine.model.AgendamentoTransferenciaModel;
 import com.avaliacao.tokiomarine.repository.AgendamentoTransferenciaRepository;
 import com.avaliacao.tokiomarine.service.AgendamentoTransferenciaService;
-import com.avaliacao.tokiomarine.util.RequestBuilderModelUtil;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
