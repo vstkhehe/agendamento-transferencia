@@ -20,10 +20,9 @@ public class AgendamentoTransferenciaController {
     @PostMapping("/add")
     public ResponseEntity addAgendamento(@RequestBody AgendamentoTransferenciaModel agendamentoTransferenciaModel){
         try {
-            var agendamentoTransferencia = agendamentoTransferenciaService.addAgendamento(agendamentoTransferenciaModel);
             return ResponseEntity
                     .created(new URI("/api/agendamento-transferencia/" + agendamentoTransferenciaModel.getId()))
-                    .body(agendamentoTransferencia);
+                    .body(agendamentoTransferenciaService.addAgendamento(agendamentoTransferenciaModel));
         }catch (Exception e){
             return ResponseEntity.badRequest().build();
         }
