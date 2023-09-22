@@ -28,6 +28,12 @@ public class AgendamentoTransferenciaController {
         }
     }
 
+    @PutMapping("/edit")
+    public ResponseEntity editAgendamentos(@RequestBody AgendamentoTransferenciaModel agendamentoTransferenciaModel){
+        return ResponseEntity.ok(agendamentoTransferenciaService.update(agendamentoTransferenciaModel));
+
+    }
+
     @GetMapping("/{id}")
     public ResponseEntity getAgendamento(@PathVariable("id") Long id){
         return ResponseEntity.ok(agendamentoTransferenciaService.getAgendamentoById(id));

@@ -21,8 +21,9 @@ public class AgendamentoTransferenciaModel {
 
    public static DateTimeFormatter dateTimeFormatter = DateTimeFormatter.ofPattern("dd-MM-yyyy");
 
-    @Id()
+
     @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Id
     private long id;
 
     private String contaOrigem;

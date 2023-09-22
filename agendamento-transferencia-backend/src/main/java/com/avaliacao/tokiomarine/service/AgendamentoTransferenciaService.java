@@ -15,5 +15,9 @@ public interface AgendamentoTransferenciaService {
 
     public List<AgendamentoTransferenciaModel> getAgendamentos();
 
+    ResponseEntity<String> update(AgendamentoTransferenciaModel agendamentoTransferenciaModel);
+
     public void deleteAgendamento(long id);
+
+
 }

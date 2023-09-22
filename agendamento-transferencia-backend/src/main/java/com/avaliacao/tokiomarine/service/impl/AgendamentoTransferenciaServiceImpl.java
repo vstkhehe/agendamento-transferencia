@@ -11,8 +11,7 @@ import org.springframework.stereotype.Service;
 import java.util.List;
 import java.util.Objects;
 
-import static com.avaliacao.tokiomarine.util.CalculosUtil.rangeDiasRegraB;
-import static com.avaliacao.tokiomarine.util.CalculosUtil.rangeDiasRegraC;
+import static com.avaliacao.tokiomarine.util.CalculosUtil.*;
 import static com.avaliacao.tokiomarine.util.RequestBuilderModelUtil.*;
 
 @Slf4j
@@ -20,6 +19,8 @@ import static com.avaliacao.tokiomarine.util.RequestBuilderModelUtil.*;
 public class AgendamentoTransferenciaServiceImpl implements AgendamentoTransferenciaService {
 
     private static final String REGRAS_TRANSFERENCIA_ERRO = "Erro ao salvar agendamento para transferência: Transferência inadequada às regras.";
+
+    private static final String ERRO_CAMPO_ID_UPDATE = "Campo id em branco ou com valor 0";
 
     @Autowired
     private AgendamentoTransferenciaRepository agendamentoTransferenciaRepository;
@@ -42,7 +43,6 @@ public class AgendamentoTransferenciaServiceImpl implements AgendamentoTransfere
                 return null;
             }
         }
-
         if (rangeDiasRegraB(agendamentoTransferenciaModel.getDataAgendamento(), agendamentoTransferenciaModel.getDataTransferencia())) {
             if(agendamentoTransferenciaModel.getValorTransferencia() >= 1001.0 && agendamentoTransferenciaModel.getValorTransferencia() <= 2000.0) {
                 return agendamentoTransferenciaRepository.save(buildAgendamentoRegraTipoB(agendamentoTransferenciaModel));
@@ -55,7 +55,6 @@ public class AgendamentoTransferenciaServiceImpl implements AgendamentoTransfere
                 return null;
             }
         }
-
         if(agendamentoTransferenciaModel.getValorTransferencia() >2000.0){
                 rangeDiasRegraC(agendamentoTransferenciaModel.getDataAgendamento(), agendamentoTransferenciaModel.getDataTransferencia(), agendamentoTransferenciaModel.getValorTransferencia());
                 return agendamentoTransferenciaRepository.save(buildAgendamentoRegraTipoC(agendamentoTransferenciaModel));
@@ -68,6 +67,18 @@ public class AgendamentoTransferenciaServiceImpl implements AgendamentoTransfere
     @Override
     public AgendamentoTransferenciaModel getAgendamentoById(long id) {
         return agendamentoTransferenciaRepository.findById(id).get();
+    }
+
+    @Override
+    public ResponseEntity update(AgendamentoTransferenciaModel agendamentoTransferenciaModel) {
+        if(agendamentoTransferenciaModel.getId() == 0){
+            return ResponseEntity.badRequest().body(ERRO_CAMPO_ID_UPDATE);
+        }
+        var responseBody = regrasAgendamentoTransferencia(agendamentoTransferenciaModel);
+        if(!Objects.isNull(responseBody))
+            return ResponseEntity.ok(responseBody);
+        else
+            return ResponseEntity.badRequest().body(REGRAS_TRANSFERENCIA_ERRO);
     }
 
     @Override
