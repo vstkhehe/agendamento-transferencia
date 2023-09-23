@@ -4,13 +4,17 @@ INSTRUÇÕES
 
 Antes de subir os projetos, deve ter as devidas configurações citadas acima na máquina.
 
-1 - Clonar o projeto da branch "main"
+1 - Clonar o projeto da branch "main".
 
 2 - Abrir o projeto "agendamento-transferencia-backend" em uma IDE de sua preferência com Java 11 instalado e configurado na máquina.
 
 3 - Buildar e startar a aplicação backend (agendamento-transferencia-backend).
 
-4 - Abrir o projeto "agendamento-transferencia-frontend" e subir com o comando no terminal da IDE: "npm run dev"
+4 - Abrir o projeto "agendamento-transferencia-frontend".
+
+5 - Executar o comando "npm install" no terminal da IDE.
+
+6 - Subir a aplicação com o comando no terminal da IDE: "npm run dev".
 
 5 - Acessar o endereço padrão: http://localhost:5173/
 
