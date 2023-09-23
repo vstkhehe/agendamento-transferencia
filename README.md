@@ -1,3 +1,15 @@
+INSTRUÇÕES
+
+Antes de subir os projetos, deve ter as devidas configurações citadas acima na máquina.
+
+1 - Clonar o projeto da branch "main"
+2 - Abrir o projeto "agendamento-transferencia-backend" em uma IDE de sua preferência com Java 11 instalado e configurado na máquina.
+3 - Buildar e startar a aplicação backend (agendamento-transferencia-backend).
+4 - Abrir o projeto "agendamento-transferencia-frontend" e subir com o comando no terminal da IDE: "npm run dev"
+5 - Acessar o endereço padrão: http://localhost:5173/
+
+##################################################################################################################
+
 Ferramentas utilizada para o desenvolvimento:
  
 IntelliJ IDEA 2022.2.3 (Community Edition)
@@ -27,16 +39,6 @@ Spring Data JPA - Conexão com o banco de dados e herdar metodos para manipulaç
 Spring WEB - Criaçao de aplicaçao restful/utilizar os recursos da arquitetura rest.
 Jackson Modules - Dependência para manipulação de datas.
 H2 - Banco de dados em memória.
-
-##################################################################################################################
-INSTRUÇÕES
-
-Antes de subir os projetos, deve ter as devidas configurações citadas acima na máquina.
-
-1 - Abrir o projeto "agendamento-transferencia-backend" em uma IDE de sua preferência com Java 11 instalado e configurado na máquina.
-2 - Buildar e startar a aplicação backend (agendamento-transferencia-backend).
-3 - Abrir o projeto "agendamento-transferencia-frontend" e subir com o comando no terminal da IDE: "npm run dev"
-4 - Acessar o endereço padrão: http://localhost:5173/
 
 ##################################################################################################################
 BANCO DE DADOS
