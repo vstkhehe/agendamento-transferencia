@@ -6,7 +6,7 @@
         <div class="container">
             <div class="row">
                 <div class="col-md-12">
-                    <h1 class="text-center">Agendamentos</h1>
+                    <h1 class="text-center">Buscar Agendamentos</h1>
                     
                     <table class="table table-striped">
                         <thead>
@@ -22,20 +22,29 @@
                             </tr>
                         </thead>
                         <tbody>
-                            <tr v-for="agendamento in agendamentos" :key="agendamento.id">
-                                <th scope="row">{{ agendamento.id }}</th>
-                                <td>{{ agendamento.contaOrigem }}</td>
-                                <td>{{ agendamento.contaDestino }}</td>
-                                <td>{{ agendamento.valorTransferencia }}</td>
-                                <td>{{ agendamento.valorTransferenciaTaxa }}</td>
-                                <td>{{ agendamento.valorTransferenciaTotal }}</td>
-                                <td>{{ agendamento.dataTransferencia }}</td>
-                                <td>{{ agendamento.dataAgendamento }}</td>
+                            <tr>
+                                <th scope="row">{{ agendamentos.id }}</th>
+                                <td>{{ agendamentos.contaOrigem }}</td>
+                                <td>{{ agendamentos.contaDestino }}</td>
+                                <td>{{ agendamentos.valorTransferencia }}</td>
+                                <td>{{ agendamentos.valorTransferenciaTaxa }}</td>
+                                <td>{{ agendamentos.valorTransferenciaTotal }}</td>
+                                <td>{{ agendamentos.dataTransferencia }}</td>
+                                <td>{{ agendamentos.dataAgendamento }}</td>
                                 <td>
-                                    <a class="btn btn-primary" :href="`/edit/${agendamento.id}`">Edit</a>
+                                    <a class="btn btn-primary" :href="`/edit/${agendamentos.id}`">Edit</a>
                                 </td>
                                 <td>    
                                     <button class="btn btn-danger mx-2" @click="deleteAgendamentos(agendamento.id)">Delete</button>
+                                </td>
+                            </tr>
+                            <tr>
+                                <th scope="col">Id</th>
+                                <td>
+                                    <input type="text" name="id" id="id" class="form-control" placeholder="0" required v-model="id">
+                                </td>
+                                <td>
+                                    <button class="btn btn-primary mx-2" @click="findAgendamento(id)">Buscar</button>
                                 </td>
                             </tr>
                         </tbody>
@@ -52,7 +61,7 @@
 import Navbar from '../components/Navbar.vue'
 
 export default {
-    name: 'ViewAgendamento',
+    name: 'FindAgendamento',
     components : {
         Navbar
     },
@@ -61,10 +70,6 @@ export default {
             agendamentos: []
         }
     },
-
-    beforeMount(){
-            this.getAgendamentos()
-        },
 
     methods: {
         getAgendamentos(){
@@ -82,9 +87,21 @@ export default {
             })
             .then(data => {
                 console.log(data)
-                this.getAgendamentos()
+            })
+        },
+        findAgendamento(id){
+            fetch(`http://localhost:8080/api/agendamento-transferencia/${id}`, 
+            {
+                method: 'GET',
+            })
+            .then(res => res.json())
+            .then(data => {
+                this.agendamentos = data
+                console.log(data)
             })
         }
+
+
     }
 }
 
