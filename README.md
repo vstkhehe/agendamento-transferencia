@@ -77,21 +77,34 @@ Configurações do banco se encontram no application.properties
 ENDPOINTS
 
 Adicionar Agendamento: http://localhost:8080/api/agendamento-transferencia/add
+
 Payload:
+ 
  {
+   
    "contaOrigem":"String",
+   
    "contaDestino":"String",
+   
    "valorTransferenciaTaxa":Double,
+   
    "dataTransferencia":"String"
  }
 
 Editar Agendamento: http://localhost:8080/api/agendamento-transferencia/edit
+
 payload:
+
 {
+  
   "id": long,
+  
   "contaOrigem":"String",
+ 
   "contaDestino":"String",
+ 
   "valorTransferencia":Double,
+  
   "dataTransferencia":"String"
 }
 
