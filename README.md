@@ -4,9 +4,13 @@ INSTRUÇÕES
 Antes de subir os projetos, deve ter as devidas configurações citadas acima na máquina.
 
 1 - Clonar o projeto da branch "main"
+
 2 - Abrir o projeto "agendamento-transferencia-backend" em uma IDE de sua preferência com Java 11 instalado e configurado na máquina.
+
 3 - Buildar e startar a aplicação backend (agendamento-transferencia-backend).
+
 4 - Abrir o projeto "agendamento-transferencia-frontend" e subir com o comando no terminal da IDE: "npm run dev"
+
 5 - Acessar o endereço padrão: http://localhost:5173/
 
 #######################################################################################
@@ -30,16 +34,22 @@ Banco de dados: H2
 
 Liguagens:
 Java 11 para utilizar os recursos do java 8 + aprimoramentos de inicialização, desempenho e o uso de memória.
+
 JavaScript
 
 Maven como ferramenta para automação de compilação e gerenciamento de dependências.
 
 Dependências:
 Lombok - Para utilizar features do "Builder".
+
 Springboot Dev Tools - Reinicializaçao rápida a cada modificação.
+
 Spring Data JPA - Conexão com o banco de dados e herdar metodos para manipulação.
+
 Spring WEB - Criaçao de aplicaçao restful/utilizar os recursos da arquitetura rest.
+
 Jackson Modules - Dependência para manipulação de datas.
+
 H2 - Banco de dados em memória.
 
 #######################################################################################
