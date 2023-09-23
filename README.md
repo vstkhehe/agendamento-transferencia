@@ -1,3 +1,4 @@
+#######################################################################################
 INSTRUÇÕES
 
 Antes de subir os projetos, deve ter as devidas configurações citadas acima na máquina.
@@ -9,6 +10,7 @@ Antes de subir os projetos, deve ter as devidas configurações citadas acima na
 5 - Acessar o endereço padrão: http://localhost:5173/
 
 #######################################################################################
+CONFIGURAÇÕES
 
 Ferramentas utilizada para o desenvolvimento:
  
@@ -57,7 +59,6 @@ Password: 123
 Configurações do banco se encontram no application.properties
 
 #######################################################################################
-
 ENDPOINTS
 
 Adicionar Agendamento: http://localhost:8080/api/agendamento-transferencia/add
