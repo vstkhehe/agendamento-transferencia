@@ -8,7 +8,7 @@ Antes de subir os projetos, deve ter as devidas configurações citadas acima na
 4 - Abrir o projeto "agendamento-transferencia-frontend" e subir com o comando no terminal da IDE: "npm run dev"
 5 - Acessar o endereço padrão: http://localhost:5173/
 
-##################################################################################################################
+#######################################################################################
 
 Ferramentas utilizada para o desenvolvimento:
  
@@ -40,7 +40,7 @@ Spring WEB - Criaçao de aplicaçao restful/utilizar os recursos da arquitetura 
 Jackson Modules - Dependência para manipulação de datas.
 H2 - Banco de dados em memória.
 
-##################################################################################################################
+#######################################################################################
 BANCO DE DADOS
 
 Após subir a aplicação, acessar a URL para o banco de dados: http://localhost:8080/h2
@@ -56,7 +56,7 @@ Password: 123
 
 Configurações do banco se encontram no application.properties
 
-##################################################################################################################
+#######################################################################################
 
 ENDPOINTS
 
@@ -85,4 +85,4 @@ Get Agendamentos: http://localhost:8080/api/agendamento-transferencia/agendament
 
 Delete Agendamento By Id: http://localhost:8080/api/agendamento-transferencia/{id}
 
-##################################################################################################################
+#######################################################################################
