@@ -15,8 +15,6 @@ public class AgendamentoTransferenciaController {
 
     private static final String URL_ORIGIN = "http://localhost:5173";
 
-    private static final String REGRAS_TRANSFERENCIA_ERRO = "Erro ao salvar agendamento para transferência: Transferência inadequada às regras.";
-
     @Autowired
     private AgendamentoTransferenciaService agendamentoTransferenciaService;
 
@@ -32,7 +30,7 @@ public class AgendamentoTransferenciaController {
                         .created(new URI("/api/agendamento-transferencia/" + agendamentoTransferenciaModel.getId()))
                         .body(response);
             }else{
-                return ResponseEntity.badRequest().body(REGRAS_TRANSFERENCIA_ERRO);
+                return ResponseEntity.badRequest().body(response);
             }
         }catch (Exception e){
             return ResponseEntity.badRequest().build();
@@ -42,8 +40,13 @@ public class AgendamentoTransferenciaController {
     @CrossOrigin(origins = URL_ORIGIN)
     @PutMapping("/edit")
     public ResponseEntity editAgendamentos(@RequestBody AgendamentoTransferenciaModel agendamentoTransferenciaModel){
-        return ResponseEntity.ok(agendamentoTransferenciaService.update(agendamentoTransferenciaModel));
+        var response = agendamentoTransferenciaService.update(agendamentoTransferenciaModel);
 
+        if(response.getStatusCode().is2xxSuccessful()) {
+            return ResponseEntity.ok(response);
+        }else{
+            return ResponseEntity.badRequest().body(response);
+        }
     }
 
     @CrossOrigin(origins = URL_ORIGIN)

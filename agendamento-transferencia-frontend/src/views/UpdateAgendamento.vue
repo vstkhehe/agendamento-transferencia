@@ -5,18 +5,18 @@
                 <div class="mx-auto w-300" style="max-width: 100;">
                     <h2 class="text-center mb-3">Editar Agendamento</h2>
                     <form @submit.prevent="updateAgendamento">
-                        <!-- contaOrigem -->
+                     <!-- contaOrigem -->
                     <div class="row">
                         <div class="col-md-12 form-group mb-3">
                             <label for="contaOrigem" class="form-label">Conta de Origem</label>
-                            <input type="text" name="contaOrigem" id="contaOrigem" class="form-control" placeholder="xxxxxx" required v-model="agendamento.contaOrigem">
+                            <input v-model="agendamento.contaOrigem" type = "number" maxlength = "6" name="contaOrigem" id="contaOrigem" class="form-control" placeholder="xxxxxx" oninput="javascript: if (this.value.length > this.maxLength) this.value = this.value.slice(0, this.maxLength);" required />
                         </div>
                     </div>
                     <!-- contaDestino -->
                     <div class="row">
                         <div class="col-md-12 form-group mb-3">
                             <label for="contaDestino" class="form-label">Conta de Destino</label>
-                            <input type="text" name="contaDestino" id="contaDestino" class="form-control" placeholder="xxxxxx" required v-model="agendamento.contaDestino">
+                            <input v-model="agendamento.contaDestino" type = "number" maxlength = "6" name="contaDestino" id="contaDestino" class="form-control" placeholder="xxxxxx" oninput="javascript: if (this.value.length > this.maxLength) this.value = this.value.slice(0, this.maxLength);" required />
                         </div>
                     </div>
                     <!-- valorTransferencia --> 
@@ -30,7 +30,7 @@
                     <div class="row">
                         <div class="col-md-12 form-group mb-3">
                             <label for="dataTransferencia" class="form-label">Data para Tranferência</label>
-                            <input type="text" name="dataTransferencia" id="dataTransferencia" class="form-control" placeholder="dd-mm-aaaa" required v-model="agendamento.dataTransferencia">
+                            <input type="text" name="dataTransferencia" id="dataTransferencia" class="form-control" placeholder="dd-mm-aaaa"  v-mask="'##-##-####'" required v-model="agendamento.dataTransferencia">
                         </div>
                     </div>
 
@@ -92,8 +92,20 @@ export default {
             })
             .then(data => {
                 console.log(this.data)
+                if (!data.ok) {
+                    const error = (data && data.message) || data.statusText;
+                    return Promise.reject(error);
+                }
                 this.$router.push("/")
-            })
+                this.$toast.success(`Adicionado com sucesso!`, {
+                        position: "top-right",
+                        });
+                    }).catch(error => {
+                this.errorMessage = error;
+                this.$toast.error("Erro ao salvar agendamento para transferência: Transferência inadequada às regras.", {
+                        position: "top-right",
+                        });
+            });s
         }
     },
     beforeMount(){
