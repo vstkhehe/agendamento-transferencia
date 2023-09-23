@@ -60,10 +60,15 @@ Após subir a aplicação, acessar a URL para o banco de dados: http://localhost
 Utilizar com os seguintes dados:
 
 Saved Settings:	Generic H2(Embedded)
+
 Setting Name: Generic H2(Embedded)
+
 Driver Class: org.h2.Driver
+
 JDBC URL: jdbc:h2:mem:banco
+
 User Name: admin
+
 Password: 123
 
 Configurações do banco se encontram no application.properties
