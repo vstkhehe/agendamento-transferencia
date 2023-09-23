@@ -93,6 +93,7 @@ Payload:
    "valorTransferenciaTaxa":Double,
    
    "dataTransferencia":"String"
+ 
  }
 
 Editar Agendamento: http://localhost:8080/api/agendamento-transferencia/edit
@@ -110,6 +111,7 @@ payload:
   "valorTransferencia":Double,
   
   "dataTransferencia":"String"
+
 }
 
 Get Agendamento By Id: http://localhost:8080/api/agendamento-transferencia/{id}
