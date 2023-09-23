@@ -34,7 +34,10 @@ public class AgendamentoTransferenciaServiceImpl implements AgendamentoTransfere
             return ResponseEntity.badRequest().body(REGRAS_TRANSFERENCIA_ERRO);
     }
 
+    //Método responsável por direcionar as requests para as devidas regras.
     private AgendamentoTransferenciaModel regrasAgendamentoTransferencia(AgendamentoTransferenciaModel agendamentoTransferenciaModel) {
+
+        //Regra de transferência tipo A
         if (agendamentoTransferenciaModel.getDataTransferencia().equals(agendamentoTransferenciaModel.getDataAgendamento())){
             if(agendamentoTransferenciaModel.getValorTransferencia() <= 1000.0){
                 return agendamentoTransferenciaRepository.save(buildAgendamentoRegraTipoA(agendamentoTransferenciaModel));
@@ -43,6 +46,7 @@ public class AgendamentoTransferenciaServiceImpl implements AgendamentoTransfere
                 return null;
             }
         }
+        //Regra de transferência tipo B
         if (rangeDiasRegraB(agendamentoTransferenciaModel.getDataAgendamento(), agendamentoTransferenciaModel.getDataTransferencia())) {
             if(agendamentoTransferenciaModel.getValorTransferencia() >= 1001.0 && agendamentoTransferenciaModel.getValorTransferencia() <= 2000.0) {
                 return agendamentoTransferenciaRepository.save(buildAgendamentoRegraTipoB(agendamentoTransferenciaModel));
@@ -55,6 +59,8 @@ public class AgendamentoTransferenciaServiceImpl implements AgendamentoTransfere
                 return null;
             }
         }
+
+        //Regra de transferência tipo C
         if(agendamentoTransferenciaModel.getValorTransferencia() >2000.0){
                 rangeDiasRegraC(agendamentoTransferenciaModel.getDataAgendamento(), agendamentoTransferenciaModel.getDataTransferencia(), agendamentoTransferenciaModel.getValorTransferencia());
                 return agendamentoTransferenciaRepository.save(buildAgendamentoRegraTipoC(agendamentoTransferenciaModel));

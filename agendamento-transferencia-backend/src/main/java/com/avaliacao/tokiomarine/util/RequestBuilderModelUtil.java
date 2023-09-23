@@ -9,9 +9,12 @@ import java.text.NumberFormat;
 import static com.avaliacao.tokiomarine.util.CalculosUtil.regraTipoA;
 
 @Slf4j
+
+//Classe responsável por construir o objeto após passar pelas regras e também por fazer os devidos cálculos de taxas.
 public class RequestBuilderModelUtil {
 
     public static NumberFormat formatter = new DecimalFormat("#0,00");
+
     public static AgendamentoTransferenciaModel buildAgendamentoRegraTipoA(AgendamentoTransferenciaModel agendamentoTransferenciaModel){
         return AgendamentoTransferenciaModel
                 .builder()
